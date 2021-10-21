@@ -1,0 +1,72 @@
+package Sortings;
+
+public class Merge_Sort
+{
+    static void mSort(int arr[],int l,int r)
+    {
+        if (l<r)
+        {
+            int mid=(l+r)/2;
+            mSort(arr,l,mid);
+            mSort(arr,mid+1,r);
+
+            Merge(arr,l,mid,r);
+        }
+    }
+
+    static void Merge(int arr[],int l,int mid,int r)
+    {
+        int i=l;
+        int j=mid+1;
+        int k=l;
+        int[] brr =new int[arr.length];
+        while (i<=mid && j<=r)
+        {
+            if(arr[i]<arr[j])
+            {
+                brr[k]=arr[i];
+                i++;
+            }
+            else
+            {
+                brr[k]=arr[j];
+                j++;
+            }
+            k++;
+        }
+
+        if (i>mid)
+        {
+            while (j<=r)
+            {
+                brr[k]=arr[j];
+                k++;
+                j++;
+            }
+        }
+        else
+        {
+            while (i<=mid)
+            {
+                brr[k]=arr[i];
+                k++;
+                i++;
+            }
+        }
+
+        for (k=l;k<=r;k++)
+            arr[k]=brr[k];
+    }
+
+    public static void main(String[] args) {
+        int arr[]={10,7,8,9,1,5};
+        mSort(arr,0, arr.length-1);
+        System.out.print("{");
+        for (int ele:arr
+        ) {
+            System.out.print(ele+", ");
+
+        }
+        System.out.print("}");
+    }
+}
