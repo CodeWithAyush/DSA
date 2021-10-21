@@ -1,0 +1,207 @@
+package DS;
+
+class SingleLinkedList
+{
+    public static ListNode head;
+
+    private static class ListNode
+    {
+        private int data;
+        private ListNode next;
+
+        public ListNode(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+
+    public void insert(int key,int value)
+    {
+        ListNode newNode=new ListNode(value);
+        if (key==1)
+        {
+            newNode.next=head;
+            head=newNode;
+        }
+        else
+        {
+            ListNode prev=head;
+            int count=1;
+            while (count<key-1)
+            {
+
+                prev=prev.next;
+                count++;
+            }
+            ListNode cur=prev.next;
+            prev.next=newNode;
+            newNode.next=cur;
+        }
+    }
+
+    public void insertFirst(int value)
+    {
+        ListNode newNode= new ListNode(value);
+        newNode.next=head;
+        head=newNode;
+    }
+
+    public void insertLast(int value)
+    {
+        ListNode newNode=new ListNode(value);
+        if (head==null)
+        {
+            head=newNode;
+            return;
+        }
+        ListNode cur=head;
+        while (null!=cur.next)
+        {
+            cur=cur.next;
+        }
+        cur.next=newNode;
+    }
+
+    public void deleteFirst()
+    {
+        ListNode cur=head.next;
+        head=cur;
+    }
+
+    public ListNode deleteLast()
+    {
+        ListNode cur=head;
+        ListNode prev=null;
+        while (cur.next!=null)
+        {
+            prev=cur;
+            cur=cur.next;
+        }
+        prev.next=null;
+        return cur;
+
+    }
+
+    public ListNode delete(int key)
+    {
+        if (key==1)
+        {
+            head=head.next;
+            return head;
+        }
+        ListNode cur=head;
+        ListNode prev=null;
+        int count=1;
+        while (count!=key)
+        {
+            prev=cur;
+            cur=cur.next;
+            count++;
+        }
+        prev.next=cur.next;
+        return prev;
+    }
+
+    public ListNode remove(int value)
+    {
+        if (value==head.data)
+        {
+            head=head.next;
+            return head;
+        }
+        ListNode cur=head;
+        ListNode prev=null;
+        while (value!=cur.data)
+        {
+            prev=cur;
+            cur=cur.next;
+        }
+        prev.next=cur.next;
+        return prev;
+    }
+
+    public ListNode reverse(ListNode node)
+    {
+        ListNode cur=node;
+        ListNode prev=null;
+        ListNode next=null;
+        while (cur!=null)
+        {
+            next=cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=next;
+        }
+        node=prev;
+        return node;
+    }
+
+    public int len()
+    {
+        if (head==null)
+        {
+            return 0;
+        }
+        int count=0;
+        ListNode cur=head;
+        while (cur!=null)
+        {
+            count++;
+            cur=cur.next;
+        }
+        return count;
+    }
+
+    public void display()
+    {
+        ListNode cur=head;
+        while (cur!=null)
+        {
+            System.out.print(cur.data+"->");
+            cur=cur.next;
+        }
+        System.out.print("null");
+    }
+
+    public static void main(String[] args) {
+        SingleLinkedList sl1=new SingleLinkedList();
+        sl1.head=new ListNode(10);
+        ListNode second=new ListNode(1);
+        ListNode third=new ListNode(8);
+        ListNode forth=new ListNode(11);
+
+        sl1.head.next=second;
+        second.next=third;
+        third.next=forth;
+//        sl1.display();
+//        sl1.insert(2,2);
+//        sl1.display();
+
+//        System.out.println("\nLength is "+sl1.len());
+//        sl1.insertFirst(6);
+//        sl1.display();
+//        System.out.println();
+//        sl1.insertLast(23);
+//        sl1.display();
+//        System.out.println();
+//        sl1.insert(3,60);
+//        sl1.display();
+//        System.out.println();
+//        sl1.deleteFirst();
+//        sl1.display();
+//        System.out.println();
+//        sl1.deleteLast();
+//        sl1.display();
+//        System.out.println();
+//        sl1.delete(3);
+//        sl1.display();
+//        System.out.println();
+//        sl1.remove(10);
+//        sl1.display();
+//        System.out.println();
+        sl1.reverse(head);
+        sl1.display();
+
+    }
+}
